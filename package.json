@@ -1,9 +1,9 @@
 {
   "name": "pallo",
-  "author": "David Karhi"
+  "author": "David Karhi",
   "version": "0.0.1",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node pallo.js"
   },
   "dependencies": {
     "socket.io": "latest"

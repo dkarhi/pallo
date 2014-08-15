@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pollo</title>
+        <style type="text/css">
+            #gameBoard {
+              width: 500px;
+              margin: 20px auto 0 auto;
+              background-color: #E288A0;
+              background-color: rgba(255,255,255,0.5);
+  
+              border: 7px solid #B71F45;
+              padding: 20px;
+              border-radius: 10px;
+              overflow: hidden;
+            }
+            .circle {
+              border-radius: 50%;
+              width: 75px;
+              height: 75px;
+              border: 3px solid #000;
+              float: left;
+              
+            }  
+            .clearFloat {
+              clear: both
+            }
+        </style>
+        <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+            window.onload = function() {
+              var header = document.getElementById("header");
+              var allUsers = document.getElementById("users");
+              var gameWindow = document.getElementById("game-board");
+              var lastWinner = document.getElementById("last-winner");
+
+              var socket = io.connect('http://localhost');
+              socket.on('users', function (data) {
+                allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
+              });
+              socket.on('update', function (data) {
+              
+              });
+              socket.on('win', function (data) {
+              });
+             
+              gameWindow.onclick = function() {
+                socket.emit("click");
+              });  
+            }
+        </script>
+    </head>
+    <body class="main">
+        <div id="header"></div>
+        <hr />
+        <div id="gameBoard">
+            <div id="circle1" class="circle"></div>
+            <div id="circle2" class="circle"></div>
+            <div id="circle3" class="circle"></div>
+            <div id="circle4" class="circle"></div>
+            <div id="circle5" class="circle"></div>
+        </div>
+        <hr class="clearFloat" />
+        <div id="users"></div>
+        <hr />
+        <div id="last-winner"></div>
+    </body>
+</html>
