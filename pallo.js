@@ -3,7 +3,7 @@ var handler = function(req, res) {
     if(err) throw err;
     res.writeHead(200);
     res.end(data);
-  }); 
+  });
 };
 
 var server = require('http').createServer(handler);
@@ -22,5 +22,8 @@ io.sockets.on('connection', function (socket) {
   });
   socket.on("click", function() {
     setGamePiece();
+  });
+  socket.on(data, function() {
+    changeColour(data.circle, data.id);
   });
 });

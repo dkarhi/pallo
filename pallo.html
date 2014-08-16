@@ -47,25 +47,36 @@
               gameWindow.onclick = function() {
                 socket.emit("click");
               });
+              var data
               var circle1 = document.getElementById("circle1")
               circle1.onclick = function() {
-                socket.emit("something1")
+                var data.id = user_id
+                var data.circle = circle1
+                socket.emit(data, user)
               }
               var circle2 = document.getElementById("circle2")
               circle2.onclick = function() {
-                socket.emit("something2")
+                var data.id = user_id
+                var data.circle = circle2
+                socket.emit(data, user)
               }
               var circle2 = document.getElementById("circle3")
               circle3.onclick = function() {
-                socket.emit("something3")
+                var data.id = user_id
+                var data.circle = circle3
+                socket.emit(data, user)
               }
               var circle2 = document.getElementById("circle4")
               circle4.onclick = function() {
-                socket.emit("something4")
+                var data.id = user_id
+                var data.circle = circle4
+                socket.emit(data, user)
               }
               var circle2 = document.getElementById("circle5")
               circle5.onclick = function() {
-                socket.emit("something5")
+                var data.id = user_id
+                var data.circle = circle5
+                socket.emit(data, user)
               }
             }
         </script>
