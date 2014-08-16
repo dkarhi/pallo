@@ -14,16 +14,16 @@ var port = 8080;
 server.listen(port);
 
 io.sockets.on('connection', function (socket) {
-  var user = addUser();
-  updateBoard();
-  socket.emit("Welcome", user);
+//  var user = addUser();
+//  updateBoard();
+//  socket.emit("Welcome", user);
   socket.on('disconnect', function () {
     removeUser(user);
   });
   socket.on("click", function() {
     setGamePiece();
   });
-  socket.onclick(data, function() {
-    changeColour(data.circle, data.id);
+  socket.on('click', function(data) {
+//  dosomething with data
   });
 });
