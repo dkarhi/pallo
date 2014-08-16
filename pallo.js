@@ -9,7 +9,7 @@ var handler = function(req, res) {
 var server = require('http').createServer(handler);
 var io = require('socket.io').listen(server);
 var fs = require('fs');
-var port = 80;
+var port = 8080;
 
 server.listen(port);
 

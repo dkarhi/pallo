@@ -8,7 +8,7 @@
               margin: 20px auto 0 auto;
               background-color: #E288A0;
               background-color: rgba(255,255,255,0.5);
-  
+
               border: 7px solid #B71F45;
               padding: 20px;
               border-radius: 10px;
@@ -20,8 +20,8 @@
               height: 75px;
               border: 3px solid #000;
               float: left;
-              
-            }  
+
+            }
             .clearFloat {
               clear: both
             }
@@ -39,14 +39,34 @@
                 allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
               });
               socket.on('update', function (data) {
-              
+
               });
               socket.on('win', function (data) {
               });
-             
+
               gameWindow.onclick = function() {
                 socket.emit("click");
-              });  
+              });
+              var circle1 = document.getElementById("circle1")
+              circle1.onclick = function() {
+                socket.emit("something1")
+              }
+              var circle2 = document.getElementById("circle2")
+              circle2.onclick = function() {
+                socket.emit("something2")
+              }
+              var circle2 = document.getElementById("circle3")
+              circle3.onclick = function() {
+                socket.emit("something3")
+              }
+              var circle2 = document.getElementById("circle4")
+              circle4.onclick = function() {
+                socket.emit("something4")
+              }
+              var circle2 = document.getElementById("circle5")
+              circle5.onclick = function() {
+                socket.emit("something5")
+              }
             }
         </script>
     </head>
@@ -54,7 +74,7 @@
         <div id="header"></div>
         <hr />
         <div id="gameBoard">
-            <div id="circle1" class="circle"></div>
+            <div id="circle1" class="circle" onclick="onClick(this)"></div>
             <div id="circle2" class="circle"></div>
             <div id="circle3" class="circle"></div>
             <div id="circle4" class="circle"></div>
