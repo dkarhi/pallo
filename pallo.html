@@ -27,7 +27,53 @@
             }
         </style>
         <script src="/socket.io/socket.io.js"></script>
-        <script type="text/javascript" src="palloScripts.js">
+<!-- we need to move the javascript to a file later -->
+        <script type="text/javascript">
+
+        window.onload = function() {
+          var header = document.getElementById("header");
+          var allUsers = document.getElementById("users");
+          var gameWindow = document.getElementById("game-board");
+          var lastWinner = document.getElementById("last-winner");
+          var circle1 = document.getElementById("circle1");
+          var circle2 = document.getElementById("circle2");
+          var circle3 = document.getElementById("circle3");
+          var circle4 = document.getElementById("circle4");
+          var circle5 = document.getElementById("circle5");
+          var user_id = 'something';
+          var circle = 'circle1';
+
+          var socket = io.connect('http://localhost');
+          socket.on('users', function (data) {
+            allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
+          });
+          socket.on('update', function (data) {
+            circle1.style.backgroundColor = "red";
+          });
+          socket.on('win', function (data) {
+          });
+
+          circle1.onclick = function() {
+            circle = 'circle1'
+            socket.emit('circleclick', user_id, circle);
+          };
+          circle2.onclick = function() {
+            circle = 'circle2'
+            socket.emit('circleclick', user_id, circle);
+          };
+          circle3.onclick = function() {
+            circle = 'circle3'
+            socket.emit('circleclick', user_id, circle);
+          };
+          circle4.onClick = function() {
+            circle = 'circle4'
+            socket.emit('circleclick', user_id, circle);
+          };
+          circle5.onClick = function() {
+            circle = 'circle5'
+            socket.emit('circleclick', user_id, circle);
+          };
+        };
         </script>
     </head>
     <body class="main">

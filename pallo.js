@@ -4,6 +4,7 @@ var handler = function(req, res) {
     res.writeHead(200);
     res.end(data);
   });
+
 };
 
 var server = require('http').createServer(handler);
@@ -23,12 +24,11 @@ io.sockets.on('connection', function (socket) {
   socket.on("click", function() {
     setGamePiece();
   });
-  socket.on("circleclick", function(data) {
-    updateColor();   
+  socket.on("circleclick", function(user_id, circle) {
+    updateColor(circle, user_id);
   });
 });
 
-var updateColor = function() {
+var updateColor = function(circle, user_id) {
   io.sockets.emit("update", { color: "red" });
 }
-
