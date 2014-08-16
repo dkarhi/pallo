@@ -53,12 +53,10 @@
               gameWindow.onclick = function() {
                 socket.emit("click");
               };
-              circle1.onclick = function(data) {
+              circle1.onclick = function() {
                 params[0] = user_id;
                 params[1] = circle1;
-                socket.on('click', function(){
-                  socket.emit('circleclick', params)
-                } );
+                socket.emit('circleclick', params);
               };
 /*           circle2.onClick = function() {
                 data[0] = user_id;
