@@ -23,7 +23,7 @@ io.sockets.on('connection', function (socket) {
   socket.on("click", function() {
     setGamePiece();
   });
-  socket.on(data, function() {
+  socket.onclick(data, function() {
     changeColour(data.circle, data.id);
   });
 });
