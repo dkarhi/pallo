@@ -17,13 +17,18 @@ io.sockets.on('connection', function (socket) {
 //  var user = addUser();
 //  updateBoard();
 //  socket.emit("Welcome", user);
-  socket.on('disconnect', function () {
-    removeUser(user);
-  });
+//  socket.on('disconnect', function () {
+//    removeUser(user);
+//  });
   socket.on("click", function() {
     setGamePiece();
   });
-  socket.on('click', function(data) {
-//  dosomething with data
+  socket.on("circleclick", function(data) {
+    updateColor();   
   });
 });
+
+var updateColor = function() {
+  io.sockets.emit("update", { color: "red" });
+}
+

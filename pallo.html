@@ -38,26 +38,23 @@
               var circle3 = document.getElementById("circle3")
               var circle4 = document.getElementById("circle4")
               var circle5 = document.getElementById("circle5")
-              var params[2];
+              //var params[2];
 
               var socket = io.connect('http://localhost');
               socket.on('users', function (data) {
                 allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
               });
               socket.on('update', function (data) {
-
+                circle1.style.backgroundColor = "red";
               });
               socket.on('win', function (data) {
               });
 
-              gameWindow.onclick = function() {
-                socket.emit("click");
-              };
-              circle1.onclick = function() {
-//                params[0] = user_id;
-                params[1] = circle1;
-                socket.emit('circleclick', params);
-              };
+              circle1.onclick = function(data) {
+                //params[0] = user_id;
+                //params[1] = circle1;
+                socket.emit('circleclick');
+              }
 /*           circle2.onClick = function() {
                 data[0] = user_id;
                 data[1] = circle2;
@@ -86,7 +83,7 @@
         <div id="header"></div>
         <hr />
         <div id="gameBoard">
-            <div id="circle1" class="circle" onclick="onClick(this)"></div>
+            <div id="circle1" class="circle"></div>
             <div id="circle2" class="circle"></div>
             <div id="circle3" class="circle"></div>
             <div id="circle4" class="circle"></div>
