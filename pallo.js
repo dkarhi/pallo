@@ -37,6 +37,11 @@ io.sockets.on('connection', function (socket) {
   }
 
   socket.emit("setUser", user_id);
+  socket.emit("update", { circle: 'circle0', color: users[gameBoard[0]].color });
+  socket.emit("update", { circle: 'circle1', color: users[gameBoard[1]].color });
+  socket.emit("update", { circle: 'circle2', color: users[gameBoard[2]].color });
+  socket.emit("update", { circle: 'circle3', color: users[gameBoard[3]].color });
+  socket.emit("update", { circle: 'circle4', color: users[gameBoard[4]].color });
 //  var user = addUser();
 //  updateBoard();
 //  socket.emit("Welcome", user);
