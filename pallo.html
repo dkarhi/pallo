@@ -49,19 +49,19 @@
           socket.on('update', function (data) {
             switch (data.circle) {
               case 'circle0':
-                circle1.style.backgroundColor = data.color
+                circle0.style.backgroundColor = data.color
                 break;
               case 'circle1':
-                circle2.style.backgroundColor = data.color
+                circle1.style.backgroundColor = data.color
                 break;
               case 'circle2':
-                circle3.style.backgroundColor = data.color
+                circle2.style.backgroundColor = data.color
                 break;
               case 'circle3':
-                circle4.style.backgroundColor = data.color
+                circle3.style.backgroundColor = data.color
                 break;
               case 'circle4':
-                circle5.style.backgroundColor = data.color
+                circle4.style.backgroundColor = data.color
                 break;
             };
           });
@@ -69,23 +69,23 @@
           });
 
           circle0.onclick = function() {
-            circle = 0
+            circle = 0;
             socket.emit('circleclick', user_id, circle);
           };
           circle1.onclick = function() {
-            circle = 1
+            circle = 1;
             socket.emit('circleclick', user_id, circle);
           };
           circle2.onclick = function() {
-            circle = 2
+            circle = 2;
             socket.emit('circleclick', user_id, circle);
           };
           circle3.onclick = function() {
-            circle = 3
+            circle = 3;
             socket.emit('circleclick', user_id, circle);
           };
           circle4.onclick = function() {
-            circle = 4
+            circle = 4;
             socket.emit('circleclick', user_id, circle);
           };
         };

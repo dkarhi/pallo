@@ -37,7 +37,6 @@ io.sockets.on('connection', function (socket) {
   });
   socket.on("circleclick", function(user_id, circle) {
     updateColor(circle, user_id);
-
   });
 });
 
