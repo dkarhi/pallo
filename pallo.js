@@ -28,10 +28,11 @@ server.listen(port);
 io.sockets.on('connection', function (socket) {
   // Find the first available color
   var user_id;
-  for (i = 0; i < users.length; i++) {
-    if (users.taken === 0) {
+  for (i = 1; i < users.length; i++) {
+    if (users[i].taken === 0) {
       users.taken = 1;
       user_id = i;
+      break;
     }
   }
 
