@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Pollo</title>
+        <title>Pallo</title>
         <style type="text/css">
             #gameBoard {
               width: 500px;
@@ -43,12 +43,28 @@
           var user_id = 'something';
           var circle = 'circle1';
 
-          var socket = io.connect('http://localhost');
+          var socket = io.connect('http://localhost:8080');
           socket.on('users', function (data) {
             allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
           });
           socket.on('update', function (data) {
-            circle1.style.backgroundColor = "red";
+            switch (data.circle) {
+              case 'circle1':
+                circle1.style.backgroundColor = data.color
+                break;
+              case 'circle2':
+                circle2.style.backgroundColor = data.color
+                break;
+              case 'circle3':
+                circle3.style.backgroundColor = data.color
+                break;
+              case 'circle4':
+                circle4.style.backgroundColor = data.color
+                break;
+              case 'circle5':
+                circle5.style.backgroundColor = data.color
+                break;
+            }
           });
           socket.on('win', function (data) {
           });

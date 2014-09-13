@@ -30,5 +30,5 @@ io.sockets.on('connection', function (socket) {
 });
 
 var updateColor = function(circle, user_id) {
-  io.sockets.emit("update", { color: "red" });
+  io.sockets.emit("update", { circle: circle, color: "red" });
 }
