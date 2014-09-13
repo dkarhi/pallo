@@ -15,6 +15,8 @@ users = [
   {color: "green", count: 0}
 ];
 
+availableUsers = [ 1, 0, 0, 0, 0];
+
 var server = require('http').createServer(handler);
 var io = require('socket.io').listen(server);
 var fs = require('fs');
