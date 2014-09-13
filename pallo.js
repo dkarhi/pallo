@@ -7,6 +7,8 @@ var handler = function(req, res) {
 
 };
 
+gameBoard = [ 0, 0, 0, 0, 0 ];
+
 users = [
   {color: "white", count: 0, taken: 1},
   {color: "red", count: 0, taken: 0},
@@ -14,6 +16,7 @@ users = [
   {color: "yellow", count: 0, taken: 0},
   {color: "green", count: 0, taken: 0}
 ];
+
 
 var server = require('http').createServer(handler);
 var io = require('socket.io').listen(server);
@@ -39,5 +42,15 @@ io.sockets.on('connection', function (socket) {
 });
 
 var updateColor = function(circle, user_id) {
-  io.sockets.emit("update", { circle: circle, color: users[user_id].color });
+  circleID = "circle" + circle;
+
+  if (gameBoard[circle] == 0) {
+    newColor = user_id;
+  }
+  else if ( gameBoard[circle] != user_id) {
+    newColor = 0;
+  }
+
+  io.sockets.emit("update", { circle: circleID, color: users[newColor].color });
+  gameBoard[circle] = newColor;
 }
