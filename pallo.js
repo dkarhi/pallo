@@ -26,6 +26,16 @@ var port = 8080;
 server.listen(port);
 
 io.sockets.on('connection', function (socket) {
+  // Find the first available color
+  var user_id;
+  for (i = 0; i < users.length; i++) {
+    if (users.taken === 0) {
+      users.taken = 1;
+      user_id = i;
+    }
+  }
+
+  socket.emit("setUser", user_id);
 //  var user = addUser();
 //  updateBoard();
 //  socket.emit("Welcome", user);
