@@ -8,14 +8,12 @@ var handler = function(req, res) {
 };
 
 users = [
-  {color: "white", count: 0},
-  {color: "red", count: 0},
-  {color: "blue", count: 0},
-  {color: "yellow", count: 0},
-  {color: "green", count: 0}
+  {color: "white", count: 0, taken: 1},
+  {color: "red", count: 0, taken: 0},
+  {color: "blue", count: 0, taken: 0},
+  {color: "yellow", count: 0, taken: 0},
+  {color: "green", count: 0, taken: 0}
 ];
-
-availableUsers = [ 1, 0, 0, 0, 0];
 
 var server = require('http').createServer(handler);
 var io = require('socket.io').listen(server);
