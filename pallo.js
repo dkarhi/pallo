@@ -7,6 +7,14 @@ var handler = function(req, res) {
 
 };
 
+users = [
+  {color: "white", count: 0},
+  {color: "red", count: 0},
+  {color: "blue", count: 0},
+  {color: "yellow", count: 0},
+  {color: "green", count: 0}
+];
+
 var server = require('http').createServer(handler);
 var io = require('socket.io').listen(server);
 var fs = require('fs');
@@ -26,9 +34,10 @@ io.sockets.on('connection', function (socket) {
   });
   socket.on("circleclick", function(user_id, circle) {
     updateColor(circle, user_id);
+
   });
 });
 
 var updateColor = function(circle, user_id) {
-  io.sockets.emit("update", { circle: circle, color: "red" });
+  io.sockets.emit("update", { circle: circle, color: users[user_id].color });
 }

@@ -18,9 +18,8 @@
               border-radius: 50%;
               width: 75px;
               height: 75px;
-              border: 3px solid #000;
+              border: 1px solid #000;
               float: left;
-
             }
             .clearFloat {
               clear: both
@@ -40,7 +39,7 @@
           var circle3 = document.getElementById("circle3");
           var circle4 = document.getElementById("circle4");
           var circle5 = document.getElementById("circle5");
-          var user_id = 'something';
+          var user_id = 4;
           var circle = 'circle1';
 
           var socket = io.connect('http://localhost:8080');
@@ -64,7 +63,7 @@
               case 'circle5':
                 circle5.style.backgroundColor = data.color
                 break;
-            }
+            };
           });
           socket.on('win', function (data) {
           });
