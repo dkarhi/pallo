@@ -30,7 +30,7 @@ io.sockets.on('connection', function (socket) {
   var user_id;
   for (i = 1; i < users.length; i++) {
     if (users[i].taken === 0) {
-      users.taken = 1;
+      users[i].taken = 1;
       user_id = i;
       break;
     }
