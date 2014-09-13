@@ -34,11 +34,11 @@
           var allUsers = document.getElementById("users");
           var gameWindow = document.getElementById("game-board");
           var lastWinner = document.getElementById("last-winner");
-          var circle1 = document.getElementById("circle0");
-          var circle2 = document.getElementById("circle1");
-          var circle3 = document.getElementById("circle2");
-          var circle4 = document.getElementById("circle3");
-          var circle5 = document.getElementById("circle4");
+          var circle0 = document.getElementById("circle0");
+          var circle1 = document.getElementById("circle1");
+          var circle2 = document.getElementById("circle2");
+          var circle3 = document.getElementById("circle3");
+          var circle4 = document.getElementById("circle4");
           var user_id = 3;
           var circle = 'circle1';
 
@@ -68,23 +68,23 @@
           socket.on('win', function (data) {
           });
 
-          circle1.onclick = function() {
+          circle0.onclick = function() {
             circle = 0
             socket.emit('circleclick', user_id, circle);
           };
-          circle2.onclick = function() {
+          circle1.onclick = function() {
             circle = 1
             socket.emit('circleclick', user_id, circle);
           };
-          circle3.onclick = function() {
+          circle2.onclick = function() {
             circle = 2
             socket.emit('circleclick', user_id, circle);
           };
-          circle4.onclick = function() {
+          circle3.onclick = function() {
             circle = 3
             socket.emit('circleclick', user_id, circle);
           };
-          circle5.onclick = function() {
+          circle4.onclick = function() {
             circle = 4
             socket.emit('circleclick', user_id, circle);
           };
