@@ -21,7 +21,7 @@ users = [
 var server = require('http').createServer(handler);
 var io = require('socket.io').listen(server);
 var fs = require('fs');
-var port = 80;
+var port = process.env.PORT || 80;
 
 server.listen(port);
 
