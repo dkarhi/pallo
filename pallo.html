@@ -41,7 +41,7 @@
           var circle4 = document.getElementById("circle4");
           var user_id;
 
-          var socket = io.connect('http://localhost:80');
+          var socket = io.connect('http://pallo.herokuapp.com');
           socket.on('users', function (data) {
             allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
           });
