@@ -21,7 +21,7 @@ users = [
 var server = require('http').createServer(handler);
 var io = require('socket.io').listen(server);
 var fs = require('fs');
-var port = 8080;
+var port = 80;
 
 server.listen(port);
 
@@ -42,31 +42,50 @@ io.sockets.on('connection', function (socket) {
   socket.emit("update", { circle: 'circle2', color: users[gameBoard[2]].color });
   socket.emit("update", { circle: 'circle3', color: users[gameBoard[3]].color });
   socket.emit("update", { circle: 'circle4', color: users[gameBoard[4]].color });
-//  var user = addUser();
-//  updateBoard();
-//  socket.emit("Welcome", user);
-//  socket.on('disconnect', function () {
-//    removeUser(user);
-//  });
-  socket.on("click", function() {
-    setGamePiece();
-  });
+  
   socket.on("circleclick", function(user_id, circle) {
     updateColor(circle, user_id);
+  });
+  socket.on("disconnect", function() {
+    removeUser(user_id);
   });
 });
 
 var updateColor = function(circle, user_id) {
   circleID = "circle" + circle;
-  var newColor = user_id;
+  var newColor;
 
   if (gameBoard[circle] == 0) {
     newColor = user_id;
+    users[user_id].count++
   }
   else if ( gameBoard[circle] != user_id) {
     newColor = 0;
+    users[gameBoard[circle]].count--
   }
 
   io.sockets.emit("update", { circle: circleID, color: users[newColor].color });
   gameBoard[circle] = newColor;
+  if (users[user_id].count === 3) {
+    io.sockets.emit("win", { user: users[user_id].color });
+    clearBoard();
+  }
+}
+
+var clearBoard = function() {
+  for (i = 0; i < gameBoard.length; i++) {
+    gameBoard[i] = 0;
+  }
+  for (i = 0; i < users.length; i++) {
+    users[i].count = 0;
+  }
+  io.sockets.emit("update", { circle: 'circle0', color: users[gameBoard[0]].color });
+  io.sockets.emit("update", { circle: 'circle1', color: users[gameBoard[1]].color });
+  io.sockets.emit("update", { circle: 'circle2', color: users[gameBoard[2]].color });
+  io.sockets.emit("update", { circle: 'circle3', color: users[gameBoard[3]].color });
+  io.sockets.emit("update", { circle: 'circle4', color: users[gameBoard[4]].color });
+}
+
+var removeUser = function (user_id) {
+  users[user_id].taken = 0;
 }

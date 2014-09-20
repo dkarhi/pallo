@@ -39,9 +39,9 @@
           var circle2 = document.getElementById("circle2");
           var circle3 = document.getElementById("circle3");
           var circle4 = document.getElementById("circle4");
-          var user_id = 3;
+          var user_id;
 
-          var socket = io.connect('http://localhost:8080');
+          var socket = io.connect('http://localhost:80');
           socket.on('users', function (data) {
             allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
           });
@@ -68,6 +68,7 @@
             };
           });
           socket.on('win', function (data) {
+            lastWinner.innerHTML = data.user + " user wins!";
           });
 
           circle0.onclick = function() {
