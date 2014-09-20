@@ -53,10 +53,9 @@ io.sockets.on('connection', function (socket) {
 
 var updateColor = function(circle, user_id) {
   circleID = "circle" + circle;
-  var newColor;
+  var newColor = user_id;
 
   if (gameBoard[circle] == 0) {
-    newColor = user_id;
     users[user_id].count++
   }
   else if ( gameBoard[circle] != user_id) {
