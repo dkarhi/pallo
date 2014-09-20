@@ -6,6 +6,9 @@
     "start": "node pallo.js"
   },
   "dependencies": {
-    "socket.io": "latest"
+    "socket.io": "0.9.16"
+  },
+  "engines": {
+    "node": "0.10.4"
   }
 }
