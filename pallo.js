@@ -42,18 +42,20 @@ io.sockets.on('connection', function (socket) {
   socket.emit("update", { circle: 'circle2', color: users[gameBoard[2]].color });
   socket.emit("update", { circle: 'circle3', color: users[gameBoard[3]].color });
   socket.emit("update", { circle: 'circle4', color: users[gameBoard[4]].color });
-  
+
   socket.on("circleclick", function(user_id, circle) {
     updateColor(circle, user_id);
   });
   socket.on("disconnect", function() {
     removeUser(user_id);
+    socket.emit("printUserNames", users);
   });
     socket.on("getUsers", function() {
     socket.emit("updateUsers", { users: users });
   });
     socket.on("setUserName", function(user_id, userName) {
     users[user_id].name = userName;
+    socket.emit("printUserNames", users);
   });
 });
 
