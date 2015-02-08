@@ -40,13 +40,18 @@
           var circle3 = document.getElementById("circle3");
           var circle4 = document.getElementById("circle4");
           var user_id;
+		  var userName;
 
+		  var userName = prompt("Please Enter Your Name:")
+		  
           var socket = io.connect('http://pallo.herokuapp.com');
           socket.on('users', function (data) {
             allUsers.innerHTML = "<strong>Users:</strong>" + data.users;
           });
           socket.on('setUser', function (data) {
             user_id = data;
+			userName = prompt("Please enter Your Name")
+			socket.emit ('setUserName', user_id, userName);
           });
           socket.on('update', function (data) {
             switch (data.circle) {

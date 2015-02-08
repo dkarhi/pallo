@@ -10,11 +10,11 @@ var handler = function(req, res) {
 gameBoard = [ 0, 0, 0, 0, 0 ];
 
 users = [
-  {color: "white", count: 0, taken: 1},
-  {color: "red", count: 0, taken: 0},
-  {color: "blue", count: 0, taken: 0},
-  {color: "yellow", count: 0, taken: 0},
-  {color: "green", count: 0, taken: 0}
+  {color: "white", count: 0, taken: 1, name: ""},
+  {color: "red", count: 0, taken: 0, name: ""},
+  {color: "blue", count: 0, taken: 0, name: ""},
+  {color: "yellow", count: 0, taken: 0, name: ""},
+  {color: "green", count: 0, taken: 0, name: ""}
 ];
 
 
@@ -48,6 +48,12 @@ io.sockets.on('connection', function (socket) {
   });
   socket.on("disconnect", function() {
     removeUser(user_id);
+  });
+    socket.on("getUsers", function() {
+    socket.emit("updateUsers", [ users: users ]);
+  });
+    socket.on("setUserName", function(user_id, userName) {
+    users[user_id].name = userName;
   });
 });
 
