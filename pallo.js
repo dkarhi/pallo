@@ -50,7 +50,7 @@ io.sockets.on('connection', function (socket) {
     removeUser(user_id);
   });
     socket.on("getUsers", function() {
-    socket.emit("updateUsers", [ users: users ]);
+    socket.emit("updateUsers", { users: users });
   });
     socket.on("setUserName", function(user_id, userName) {
     users[user_id].name = userName;
