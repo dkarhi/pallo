@@ -51,26 +51,26 @@ io.sockets.on('connection', function (socket) {
     }
   }
 
-  socket.emit("setUser", user_id);
+  socket.emit("set user", user_id);
   socket.emit("update", { circle: 'circle0', color: users[gameBoard[0]].color });
   socket.emit("update", { circle: 'circle1', color: users[gameBoard[1]].color });
   socket.emit("update", { circle: 'circle2', color: users[gameBoard[2]].color });
   socket.emit("update", { circle: 'circle3', color: users[gameBoard[3]].color });
   socket.emit("update", { circle: 'circle4', color: users[gameBoard[4]].color });
 
-  socket.on("circleclick", function(user_id, circle) {
+  socket.on("circle click", function(user_id, circle) {
     updateColor(circle, user_id);
   });
   socket.on("disconnect", function() {
     removeUser(user_id);
-    socket.emit("printUserNames", users);
+    socket.emit("print user names", users);
   });
-    socket.on("getUsers", function() {
-    socket.emit("updateUsers", { users: users });
+    socket.on("get users", function() {
+    socket.emit("update users", { users: users });
   });
-    socket.on("setUserName", function(user_id, userName) {
+    socket.on("set user name", function(user_id, userName) {
     users[user_id].name = userName;
-    socket.emit("printUserNames", users);
+    socket.emit("print user names", users);
   });
 });
 

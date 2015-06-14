@@ -43,16 +43,16 @@
           var userName;
                    
           var socket = io.connect('http://pallo.herokuapp.com');
-          socket.on('printUserNames', function (users) {
+          socket.on('print user names', function (users) {
             allUsers.innerHTML = "<strong>Users:</strong><br>"
             for (i = 0; i < users.length; i++){
               allUsers.innerHTML += users[i].name + "<br>";
             }
           });
-          socket.on('setUser', function (data) {
+          socket.on('set user', function (data) {
             user_id = data;
             userName = prompt("Please enter Your Name")
-            socket.emit ('setUserName', user_id, userName);
+            socket.emit ('set user name', user_id, userName);
           });
           socket.on('update', function (data) {
             switch (data.circle) {
@@ -79,23 +79,23 @@
 
           circle0.onclick = function() {
             circle = 0;
-            socket.emit('circleclick', user_id, circle);
+            socket.emit('circle click', user_id, circle);
           };
           circle1.onclick = function() {
             circle = 1;
-            socket.emit('circleclick', user_id, circle);
+            socket.emit('circle click', user_id, circle);
           };
           circle2.onclick = function() {
             circle = 2;
-            socket.emit('circleclick', user_id, circle);
+            socket.emit('circle click', user_id, circle);
           };
           circle3.onclick = function() {
             circle = 3;
-            socket.emit('circleclick', user_id, circle);
+            socket.emit('circle click', user_id, circle);
           };
           circle4.onclick = function() {
             circle = 4;
-            socket.emit('circleclick', user_id, circle);
+            socket.emit('circle click', user_id, circle);
           };
         };
         </script>
