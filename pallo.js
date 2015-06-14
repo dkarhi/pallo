@@ -1,10 +1,25 @@
 var handler = function(req, res) {
-  fs.readFile('./pallo.html', function (err, data) {
-    if(err) throw err;
-    res.writeHead(200);
-    res.end(data);
-  });
-
+    var uri = require('url').parse(req.url).pathname;
+    var filename = require('path').join(process.cwd(), uri);
+    if (uri == '/') {
+        filename = "./pallo.html"
+    } 
+    fs.readFile(filename, function (err, data) {
+        if(err) {        
+            if (err.code == 'ENOENT') {
+                res.writeHead(404, {"Content-Type": "text/plain"});
+                res.write("404 Not Found\n")
+            }
+            else {
+                res.writeHead(500, {"Content-Type": "text/plain"});
+                res.write(err + "\n");
+            }
+            res.end();
+            return;
+        }
+        res.writeHead(200);
+        res.end(data);
+    });
 };
 
 gameBoard = [ 0, 0, 0, 0, 0 ];
