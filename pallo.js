@@ -1,4 +1,5 @@
 var handler = function(req, res) {
+    var mime = require('mime');
     var uri = require('url').parse(req.url).pathname;
     var filename = require('path').join(process.cwd(), uri);
     if (uri == '/') {
@@ -17,6 +18,7 @@ var handler = function(req, res) {
             res.end();
             return;
         }
+        res.setHeader("Content-Type", mime.lookup(filename));
         res.writeHead(200);
         res.end(data);
     });
