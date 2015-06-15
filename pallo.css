@@ -1,0 +1,21 @@
+#game-board {
+    width: 500px;
+    margin: 20px auto 0 auto;
+    background-color: #E288A0;
+    background-color: rgba(255,255,255,0.5);
+
+    border: 7px solid #B71F45;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.circle {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
+    border: 1px solid #000;
+    float: left;
+}
+.clear-float {
+    clear: both
+}
