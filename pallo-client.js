@@ -11,7 +11,7 @@ window.onload = function() {
     var user_id;
     var userName;
 
-    var socket = io.connect('http://localhost', { 
+    var socket = io.connect('http://pallo.herokuapp.com', { 
         'sync disconnect on unload': true });
     socket.on('print user names', function (users) {
         allUsers.innerHTML = "<strong>Users:</strong><br>";
