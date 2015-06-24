@@ -46,7 +46,7 @@ window.onload = function() {
         };
     });
     socket.on('win', function (data) {
-        lastWinner.innerHTML = data.user + " user wins!";
+        lastWinner.innerHTML = data.user + " wins!<br>" + lastWinner.innerHTML;
     });
 
     circle0.onclick = function() {

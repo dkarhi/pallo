@@ -90,8 +90,8 @@ var updateColor = function(circle, user_id) {
 
     io.sockets.emit("update", { circle: circleID, color: users[newColor].color });
     gameBoard[circle] = newColor;
-    if (users[user_id].count === 3) {
-        io.sockets.emit("win", { user: users[user_id].color });
+        if (users[user_id].count === 3) {
+        io.sockets.emit("win", { user: users[user_id].name });
         clearBoard();
     }
 }
