@@ -27,11 +27,11 @@ var handler = function(req, res) {
 gameBoard = [ 0, 0, 0, 0, 0 ];
 
 users = [
-  {color: "white", count: 0, taken: 1, name: ""},
-  {color: "red", count: 0, taken: 0, name: ""},
-  {color: "blue", count: 0, taken: 0, name: ""},
-  {color: "yellow", count: 0, taken: 0, name: ""},
-  {color: "green", count: 0, taken: 0, name: ""}
+  {color: "white", count: 0, taken: true, name: ""},
+  {color: "red", count: 0, taken: false, name: ""},
+  {color: "blue", count: 0, taken: false, name: ""},
+  {color: "yellow", count: 0, taken: false, name: ""},
+  {color: "green", count: 0, taken: false, name: ""}
 ];
 
 
@@ -46,8 +46,8 @@ io.sockets.on('connection', function (socket) {
   // Find the first available color
   var user_id;
   for (i = 1; i < users.length; i++) {
-    if (users[i].taken === 0) {
-      users[i].taken = 1;
+    if (!users[i].taken) {
+      users[i].taken = true;
       user_id = i;
       break;
     }
@@ -111,5 +111,6 @@ var clearBoard = function() {
 }
 
 var removeUser = function (user_id) {
-  users[user_id].taken = 0;
+  users[user_id].taken = false;
+  users[user_id].name = "";
 }

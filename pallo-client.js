@@ -11,11 +11,14 @@ window.onload = function() {
     var user_id;
     var userName;
 
-    var socket = io.connect('http://pallo.herokuapp.com');
+    var socket = io.connect('http://pallo.herokuapp.com', { 
+        'sync disconnect on unload': true });
     socket.on('print user names', function (users) {
         allUsers.innerHTML = "<strong>Users:</strong><br>";
         for (i = 0; i < users.length; i++){
-            allUsers.innerHTML += users[i].name + "<br>";
+            if (users[i].taken) {
+                allUsers.innerHTML += users[i].name + "<br>";
+            }
         }
     });
     socket.on('set user', function (data) {
