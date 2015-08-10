@@ -44,54 +44,57 @@ server.listen(port);
 
 io.sockets.on('connection', function (socket) {
     // Find the first available color
-    var user_id;
+    var userId;
     for (i = 1; i < users.length; i++) {
         if (!users[i].taken) {
             users[i].taken = true;
-            user_id = i;
+            userId = i;
             break;
         }
     }
 
-    socket.emit("set user", user_id);
+    socket.emit("set user", userId);
     socket.emit("update", { circle: 'circle0', color: users[gameBoard[0]].color });
     socket.emit("update", { circle: 'circle1', color: users[gameBoard[1]].color });
     socket.emit("update", { circle: 'circle2', color: users[gameBoard[2]].color });
     socket.emit("update", { circle: 'circle3', color: users[gameBoard[3]].color });
     socket.emit("update", { circle: 'circle4', color: users[gameBoard[4]].color });
 
-    socket.on("circle click", function(user_id, circle) {
-        updateColor(circle, user_id);
+    socket.on("circle click", function(userId, circle) {
+        updateColor(circle, userId);
     });
     socket.on("disconnect", function() {
-        removeUser(user_id);
+        removeUser(userId);
         io.sockets.emit("print user names", users);
     });
     socket.on("get users", function() {
         socket.emit("update users", { users: users });
     });
-    socket.on("set user name", function(user_id, userName) {
-        users[user_id].name = userName;
+    socket.on("set user name", function(userId, userName) {
+        if (userName === "") {
+            userName = "User" + userId
+        }
+        users[userId].name = userName;
         io.sockets.emit("print user names", users);
     });
 });
 
-var updateColor = function(circle, user_id) {
+var updateColor = function(circle, userId) {
     circleID = "circle" + circle;
-    var newColor = user_id;
+    var newColor = userId;
 
     if (gameBoard[circle] == 0) {
-        users[user_id].count++
+        users[userId].count++
     }
-    else if ( gameBoard[circle] != user_id) {
+    else if ( gameBoard[circle] != userId) {
         newColor = 0;
         users[gameBoard[circle]].count--
     }
 
     io.sockets.emit("update", { circle: circleID, color: users[newColor].color });
     gameBoard[circle] = newColor;
-        if (users[user_id].count === 3) {
-        io.sockets.emit("win", { user: users[user_id].name });
+        if (users[userId].count === 3) {
+        io.sockets.emit("win", { user: users[userId].name });
         clearBoard();
     }
 }
@@ -110,7 +113,7 @@ var clearBoard = function() {
     io.sockets.emit("update", { circle: 'circle4', color: users[gameBoard[4]].color });
 }
 
-var removeUser = function (user_id) {
-    users[user_id].taken = false;
-    users[user_id].name = "";
+var removeUser = function (userId) {
+    users[userId].taken = false;
+    users[userId].name = "";
 }

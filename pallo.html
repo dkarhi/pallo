@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Pallo</title>
+        <link rel=stylesheet type="text/css" href="css/jquery-ui.min.css">
         <link rel=stylesheet type="text/css" href="css/pallo.css">
     </head>
     <body class="main">
@@ -14,11 +15,18 @@
             <div id="circle3" class="circle"></div>
             <div id="circle4" class="circle"></div>
         </div>
+        <div id="user-name-dialog">
+         <label for="username-field">Please enter your name:</label>
+         <input type="text" id="username-field" name=username>
+         <input type="hidden" id="username-id-field" name=username-id>
+        </div>
         <hr class="clear-float" />
         <div id="users"></div>
         <hr />
         <div id="last-winner"></div>
         <script src="/socket.io/socket.io.js"></script>
+        <script src="js/jquery.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
         <script src="js/pallo-client.js"></script>
     </body>
 </html>

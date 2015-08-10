@@ -1,4 +1,4 @@
-window.onload = function() {
+$(function() {
     var header = document.getElementById("header");
     var allUsers = document.getElementById("users");
     var gameWindow = document.getElementById("game-board");
@@ -8,10 +8,37 @@ window.onload = function() {
     var circle2 = document.getElementById("circle2");
     var circle3 = document.getElementById("circle3");
     var circle4 = document.getElementById("circle4");
-    var user_id;
+    var userId;
     var userName;
 
-    var socket = io.connect('http://pallo.herokuapp.com', { 
+    // Set Enter key to click Ok button on Username dialog
+    $('#user-name-dialog').on('keyup', function(e){
+        if (e.keyCode == 13) {
+            $(':button:contains("Ok")').click();
+        }
+    });
+    
+    // Initialize the dialog box for inputting the user's name
+    $("#user-name-dialog").dialog({
+        modal: true,
+        autoOpen: false,
+        draggable: false,
+        resizable: false,
+        title: "Username",
+        buttons: [
+            {
+                text: "Ok",
+                click: function() {
+                    var username = $("#username-field").val();
+                    var userId = $("#username-id-field").val();  
+                    socket.emit ('set user name', userId, username);
+                    $( this ).dialog("close");
+                }
+            }
+        ] 
+    });
+
+    var socket = io.connect('http://localhost', { 
         'sync disconnect on unload': true });
     socket.on('print user names', function (users) {
         allUsers.innerHTML = "<strong>Users:</strong><br>";
@@ -22,9 +49,9 @@ window.onload = function() {
         }
     });
     socket.on('set user', function (data) {
-        user_id = data;
-        userName = prompt("Please enter Your Name");
-        socket.emit ('set user name', user_id, userName);
+        userId = data;
+        $("#username-id-field").val(userId);
+        $("#user-name-dialog").dialog("open");
     });
     socket.on('update', function (data) {
         switch (data.circle) {
@@ -51,22 +78,22 @@ window.onload = function() {
 
     circle0.onclick = function() {
         circle = 0;
-        socket.emit('circle click', user_id, circle);
+        socket.emit('circle click', userId, circle);
     };
     circle1.onclick = function() {
         circle = 1;
-        socket.emit('circle click', user_id, circle);
+        socket.emit('circle click', userId, circle);
     };
     circle2.onclick = function() {
         circle = 2;
-        socket.emit('circle click', user_id, circle);
+        socket.emit('circle click', userId, circle);
     };
     circle3.onclick = function() {
         circle = 3;
-        socket.emit('circle click', user_id, circle);
+        socket.emit('circle click', userId, circle);
     };
     circle4.onclick = function() {
         circle = 4;
-        socket.emit('circle click', user_id, circle);
+        socket.emit('circle click', userId, circle);
     };
-};
+});
