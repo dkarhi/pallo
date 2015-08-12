@@ -25,6 +25,8 @@ $(function() {
         draggable: false,
         resizable: false,
         title: "Username",
+        closeOnEscape: false,
+        open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog | ui).hide(); },
         buttons: [
             {
                 text: "Ok",
